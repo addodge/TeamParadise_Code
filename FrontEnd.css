@@ -1,0 +1,12 @@
+/*sytle*/
+h1{
+  padding-bottom: 20px;
+  padding-top: 20px;
+  background-color: powderblue;
+  text-align: center;
+  font-size: 40pt;
+  margin: 0;
+}
+table{
+  width:100%;
+}
