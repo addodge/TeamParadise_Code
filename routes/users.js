@@ -3,6 +3,7 @@ var db = require('../database');
 var app = express();
 var logged_user;
 module.exports = app;
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (request, response) {
 
@@ -168,6 +169,11 @@ app.post('/login', function (request, response) {
               password: request.body.password
           })
         }
+});
+
+app.get('/game', function (request, response) {
+  // render views/game.html
+      response.render('users/game')
 });
 
 // route to edit an item
