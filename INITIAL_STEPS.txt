@@ -1,0 +1,37 @@
+1. unzip FinalProject.zip and navigate into the directory
+
+2. locate "database.js" open the file and change the line 10 
+   to your postgres password.
+
+3. open terminal inside "FinalProject" directory
+
+4. type "psql -U postgres -h localhost"
+	- need to know password
+
+5. then type "DROP DATABASE IF EXISTS finalproject;" hit enter
+
+6. then type "CREATE DATABASE finalproject;" hit enter
+
+7. then open a new terminal inside the "FinalProject" directory again
+
+8. type "sudo su postgres" hit enter
+
+9. then type "finalproject < database.sql" hit enter
+
+to check if it worked you can open a new terminal inside 
+the "FinalProject" directory and type the following
+
+"psql -U postgres -h localhost" hit enter
+
+"\c finalproject" hit enter
+
+"SELECT * FROM users;" hit enter
+
+and you should see the following:
+
+  1 | Adam     | password1 |       
+  2 | Hunter   | password2 |       
+  3 | John     | password3 |       
+  4 | Taicheng | password4 |       
+  5 | Connor   | password5 |       
+  6 | Jason    | password6 |   

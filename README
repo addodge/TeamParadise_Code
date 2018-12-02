@@ -1,0 +1,37 @@
+For final project our database name is "finalproject" 
+table name is "users"
+to check the database type
+
+
+TO CHECK LOCALHOST:
+open terminal in "FinalProject" directory and type "node server.js"
+then put the http link into google chrome
+
+
+"psql -U postgres -h localhost"
+
+just without quotation marks. The password is 
+
+"postgres"
+
+then type 
+
+"\c finalproject"
+
+and it will bring you into the database. You can type 
+
+"SELECT * FROM finalproject;"
+
+to see the contents of the database.
+
+NOTE: to exit out of database press 
+
+"Ctrl + D"
+
+
+
+IF YOU WANT TO RESET "users" TABLE:
+
+open terminal in "FinalProject" directory and type "sudo su postgres"
+
+then "psql finalproject < database.sql"

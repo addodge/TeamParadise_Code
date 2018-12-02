@@ -1,0 +1,45 @@
+<html>
+<head>
+  <style>
+  body{
+    background-color: powderblue;
+  }
+  </style>
+   <!-- The param which is passed from render-->
+   <title><%= title %></title>
+</head>
+<body>
+
+  <div>
+    <!--adds home button to return to login/signup page-->
+     <a href="/">Home</a>
+  </div>
+
+  <h1><%= title %></h1>
+
+<% if (messages.error) { %>
+    <p style="color:red"><%- messages.error %></p>
+<% } %>
+<% if (messages.success) { %>
+    <p style="color:green"><%- messages.success %></p>
+<% } %>
+<!--Create a form to take input from user-->
+<form action="/users/login" method="post" name="form1">
+    <table width="25%" border="0">
+        <tr>
+            <td>Username</td>
+            <td><input type="text" name="username" id="name" value="<%= username %>"/></td>
+        </tr>
+        <tr>
+          <td>Password</td>
+                      <td><input type="password" name="password" value="<%= password %>"/></td>
+                  </tr>
+                  <tr>
+                      <td></td>
+                      <td><input type="submit" name="Submit" value="check"/></td>
+                  </tr>
+              </table>
+          </form>
+
+          <!--Including Footer partial-->
+          <%- include ../layouts/footer.ejs %>

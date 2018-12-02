@@ -1,0 +1,49 @@
+<html>
+<head>
+  <style>
+    body{
+      background-color: powderblue;
+    }
+    .btn{
+      /**/
+      width: 100%;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+    .btn:hover{
+      /*changes background color to black when cursor is over
+      the btn tags*/
+      background-color: white;
+    }
+  </style>
+    <!-- 'title' is the data that is passed from the index.js during the response.render function call -->
+    <title><%= title %></title>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <div class="wrapper">
+      <div class="container">
+
+        <div class="btn"><a href="/users/add">Sign up</a></div>
+        <!-- need new href for the login to look through database-->
+        <div class="btn"><a href="/users/login">Log in</a></div>
+            <!--Not sure how to do this part
+            <span><a href="#">Forgot my username or password.</a></span>
+            -->
+      </div>
+    </div>
+  <!--
+  <div>
+      <a href="/">Home</a> |
+      <a href="/users/add">Add Player</a> |
+      <a href="/users">All Players</a>
+  </div>
+  -->
+</body>
+</html>
