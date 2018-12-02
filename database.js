@@ -13,7 +13,7 @@ const dbConfig = {
 /**/
 
 /*below code is for running server in cloud*/
-/*var dbConfig = process.env.DATABASE_URL;*/
+var dbConfig = process.env.DATABASE_URL;
 
 var db = pgp(dbConfig);
 

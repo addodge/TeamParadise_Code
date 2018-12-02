@@ -42,7 +42,7 @@ machine on port number 4000*/
 var port = 4000;
 
 /*below code makes a server in the cloud*/
-/*var port = process.env.PORT;*/
+var port = process.env.PORT;
 app.listen(port, function () {
     console.log('Server running on http://localhost:' + port)
 });
