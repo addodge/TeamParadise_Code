@@ -8,7 +8,6 @@ const dbConfig = {
    database: 'finalproject',
    user: 'postgres',
    password: 'postgres' // TODO: Fill in your PostgreSQL password here.
-                // Use empty string if you did not set a password
 };
 */
 
@@ -16,5 +15,4 @@ const dbConfig = {
 var dbConfig = process.env.DATABASE_URL;
 
 var db = pgp(dbConfig);
-
 module.exports = db;

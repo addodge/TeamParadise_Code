@@ -39,7 +39,7 @@ app.use('/users', users);
 
 /*below code starts a server on your local
 machine on port number 4000*/
-/*var port = 4000;*/
+//var port = 4000;
 
 /*below code makes a server in the cloud*/
 var port = process.env.PORT;

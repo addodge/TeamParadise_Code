@@ -1,5 +1,27 @@
-<!-- Include Header Partial -->
-<%- include ../layouts/header.ejs %>
+<html>
+<head>
+  <style>
+  body {
+    background-color: powderblue;
+  }
+  a{
+    margin-bottom: 30px;
+  }
+  </style>
+   <!-- The param which is passed from render-->
+   <title><%= title %></title>
+</head>
+<body>
+<div>
+   <a href="/">Home</a>
+   <!--
+   <a href="/users/add">Add Player</a> |
+
+    <a href="/users">All Players</a> |
+    -->
+    <!--<a href="/game">PLAY</a>-->
+</div>
+<h1><%= title %></h1>
 
 <% if (messages.error) { %>
     <p style="color:red"><%- messages.error %></p>
@@ -25,7 +47,6 @@
           </table>
           <input type="hidden" name="_method" value="PUT"/>
       </form>
-
 
       <!-- Include Footer Partial -->
       <%- include ../layouts/footer.ejs %>

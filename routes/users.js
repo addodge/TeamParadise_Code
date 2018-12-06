@@ -3,6 +3,8 @@ var db = require('../database');
 var app = express();
 var logged_user;
 module.exports = app;
+// global.logged_user; is username not id
+global.logged_user;
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (request, response) {
@@ -42,8 +44,23 @@ app.post('/add', function (request, response) {
     // Validate user input - ensure non emptiness
     /*don't think we need line below*/
     /*request.assert('id', 'id is required').notEmpty();*/
-    request.assert('username', 'username is required').notEmpty();
-    request.assert('password', 'password is required').notEmpty();
+    var testId = request.body.id;
+    var testUs = request.body.username;
+    var testPa = request.body.password;
+    console.log(testUs.length);
+    console.log(testPa.length);
+    console.log(testUs);
+    console.log(testPa);
+    if(testUs.length==0 || testPa.length==0){
+      request.flash('error', 'neither field may be empty');
+      response.render('users/add', {
+          title: 'Sign Up',
+          id: testId,
+          username: testUs,
+          password: testPa
+      })
+    }
+    else{
     var errors = request.validationErrors();
         if (!errors) { // No validation errors
             var item = {
@@ -53,13 +70,15 @@ app.post('/add', function (request, response) {
                 username: request.sanitize('username').escape().trim(),
                 password: request.sanitize('password').escape().trim()
             };
-            var query = "SELECT id FROM users WHERE username='"+ item.username +"' OR password='"+ item.password +"';";
+            global.logged_user = item.username;
+            // ensures that person signing up doesn't use someone elses username
+            var query = "SELECT id FROM users WHERE username='"+ item.username +"';";
 
             db.any(query)
                 .then(function (row) {
                     // if item not found
                     if (row.length >= 1) {
-                        request.flash('error', 'A player already has this username or password');
+                        request.flash('error', 'A player already has this username');
                         response.render('users/add', {
                             title: 'Sign Up',
                             username: item.username,
@@ -113,6 +132,7 @@ app.post('/add', function (request, response) {
                 password: request.body.password
             })
           }
+        }
 });
 
 app.get('/login', function (request, response) {
@@ -125,8 +145,23 @@ app.get('/login', function (request, response) {
 });
 
 app.post('/login', function (request, response) {
-  request.assert('username', 'username is required').notEmpty();
-  request.assert('password', 'password is required').notEmpty();
+  var testId = request.body.id;
+  var testUs = request.body.username;
+  var testPa = request.body.password;
+  console.log(testUs.length);
+  console.log(testPa.length);
+  console.log(testUs);
+  console.log(testPa);
+  if(testUs.length==0 || testPa.length==0){
+    request.flash('error', 'neither field may be empty');
+    response.render('users/login', {
+        title: 'Log In',
+        id: testId,
+        username: testUs,
+        password: testPa
+    })
+  }
+  else{
   var errors = request.validationErrors();
       if (!errors) { // No validation errors
           var item = {
@@ -136,6 +171,7 @@ app.post('/login', function (request, response) {
               username: request.sanitize('username').escape().trim(),
               password: request.sanitize('password').escape().trim()
           };
+          global.logged_user = item.username;
           var query = "select id from users where username='"+ item.username +"' and password='"+ item.password +"';";
 
           db.one(query)
@@ -169,11 +205,24 @@ app.post('/login', function (request, response) {
               password: request.body.password
           })
         }
+      }
 });
 
 app.get('/game', function (request, response) {
-  // render views/game.html
-      response.render('users/game')
+  // render views/users/game.ejs
+      response.render('users/game', {score: ''})
+
+});
+
+app.post('/game', function (request, response) {//TODO: THIS PART DOES NOT WORK YET
+
+      var updateQuery = "UPDATE users SET hscore = '"+ score +"' WHERE username = '"+ name +"';";
+       // Running SQL query to insert data into the store table
+       db.none(updateQuery)
+           .then(function (result) {
+ 	   response.redirect('/users')
+	})
+        .catch(function (err) {response.redirect('/')})
 });
 
 // route to edit an item
@@ -210,12 +259,26 @@ app.get('/edit/(:id)', function (request, response) {
        })
 });
 
-// Route to update values. Notice that request method is PUT here
 app.put('/edit/(:id)', function (req, res) {
    // Validate user input - ensure non emptiness
-   req.assert('username', 'username is required').notEmpty();
-   req.assert('password', 'password is required').notEmpty();
-
+   var testId = req.body.id;
+   var testUs = req.body.username;
+   var testPa = req.body.password;
+   console.log(testUs.length);
+   console.log(testPa.length);
+   console.log(testId);
+   console.log(testUs);
+   console.log(testPa);
+   if(testUs.length==0 || testPa.length==0){
+     req.flash('error', 'neither field may be empty');
+     res.render('users/edit', {
+         title: 'Edit Player',
+         id: testId,
+         username: '',
+         password: ''
+     })
+   }
+   else{
    var errors = req.validationErrors();
    if (!errors) { // No validation errors
        var item = {
@@ -225,39 +288,94 @@ app.put('/edit/(:id)', function (req, res) {
            username: req.sanitize('username').escape().trim(),
            password: req.sanitize('password').escape().trim()
        };
-
        // Fetch the id of the item from the request.
        var itemId = req.params.id;
-
-       // TODO: Initialize the updateQuery variable with a SQL query
+       var User = item.username;
+       var Password = item.password;
+       var act_Id = global.logged_user;
+       // : Initialize the updateQuery variable with a SQL query
        // that updates the details of an item given its id
        // in the 'store' table
-       var updateQuery = "UPDATE users SET username = '"+ item.username +"', password = '"+ item.password +"' WHERE id = "+ itemId +";";
-
-       // Running SQL query to insert data into the store table
-       db.none(updateQuery)
+       var check = "SELECT * FROM users WHERE username = '"+ item.username + "';"
+       db.one(check)
+        .then(function(nrow){
+          if(nrow.length!=0 && item.username==act_Id){
+            /* each person has a unique username and id so if we find that
+            that (row.length!=0) then we know a user has this name but if
+            (nrow.username==act_Id) we know that the user didn't change their
+            "username" so we only need to update their password.*/
+            var updateQuery = "UPDATE users SET password = '"+ item.password +"' WHERE id = "+ nrow.id +";";
+            db.none(updateQuery)
+              .then(function (result) {
+                  req.flash('success', 'Data updated successfully!');
+                  res.redirect('/users');
+              })
+              .catch(function (err) {
+                  req.flash('error', err);
+                  res.render('users/edit', {
+                      title: 'Edit Player',
+                      id: nrow.id,
+                      username: nrow.username,
+                      password: nrow.password
+                  })
+              })
+          }
+          else if(nrow.length!=0 && item.username!=act_Id){
+            /*this means that the user trying to change their username
+            changed it to an already taken username*/
+            req.flash('error', 'A player already has the username: '+ item.username);
+            res.render('users/edit', {
+                title: 'Edit Player',
+                id: nrow.id,
+                username: nrow.username,
+                password: nrow.password
+            })
+          }
+          else{
+            // this doesn't run when (nrow.length==0) we go to
+            // the .catch that's attached to the .then
+            req.flash('error', 'Unkown Error Occurred');
+            res.render('users/edit', {
+                title: 'Edit Player',
+                id: nrow.id,
+                username: nrow.username,
+                password: nrow.password
+            })
+          }
+       })
+       .catch(function (err) {
+         /* the .catch() gets called when nrow==0 and this means
+         that there are currently no users who have that username*/
+         var catchId = req.params.id;
+         var updateQ = "UPDATE users SET username = '"+ item.username +"', password = '"+ item.password +"' WHERE id = "+ catchId +";";
+         db.none(updateQ)
            .then(function (result) {
                req.flash('success', 'Data updated successfully!');
+               global.logged_user = item.username;
                res.redirect('/users');
            })
            .catch(function (err) {
                req.flash('error', err);
                res.render('users/edit', {
-                   title: 'Edit Item',
-                   username: req.params.username,
+                   title: 'Edit Player',
+                   id: req.body.id,
+                   username: req.body.username,
                    password: req.body.password
                })
            })
-   }
+        })
+     }
    else {
        var error_msg = errors.reduce((accumulator, current_error) => accumulator + '<br />' + current_error.msg, '');
        req.flash('error', error_msg);
        res.render('users/edit', {
-           title: 'Edit Item,',
+           title: 'Edit Player',
+           id: req.body.id,
            username: req.body.username,
            password: req.body.password
        })
    }
+ }
 });
 
 // Route to delete an item. Notice that request method is DELETE here
@@ -272,7 +390,7 @@ app.delete('/delete/(:id)', function (req, res) {
     db.none(deleteQuery)
         .then(function (result) {
                   req.flash('success', 'successfully deleted it');
-                  res.redirect('/users');
+                  res.redirect('/');
         })
         .catch(function (err) {
                    req.flash('error', err);
