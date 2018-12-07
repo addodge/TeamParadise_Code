@@ -1,0 +1,33 @@
+<html>
+<head>
+  <style>
+  body {
+    background-color: powderblue;
+  }
+  a{
+    margin-bottom: 30px;
+  }
+  </style>
+   <!-- The param which is passed from render-->
+   <title><%= title %></title>
+</head>
+<body>
+<div>
+   <a href="/">Home</a>
+   <!--
+   <a href="/users/add">Add Player</a> |
+
+    <a href="/users">All Players</a> |
+    -->
+
+    <form action="/users/game" method="get" name="form1">
+        <table width="25%" border="0">
+              <tr>
+                  <td><input type="submit" name="submit" value="Play"/></td>
+              </tr>
+        </table>
+    </form>
+
+    <!--<a href="/game">PLAY</a>-->
+</div>
+<h1><%= title %></h1>

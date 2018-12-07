@@ -1,0 +1,91 @@
+<html>
+<head>
+  <style>
+  body {
+    background-color: powderblue;
+  }
+  </style>
+   <!-- The param which is passed from render-->
+   <title><%= title %></title>
+</head>
+<body>
+<div>
+   <a href="/">Home</a>
+   <!--
+   <a href="/users/add">Add Player</a> |
+    <a href="/users">All Players</a> |
+    -->
+
+    <form action="/users/game" method="get" name="form1">
+        <table width="25%" border="0">
+              <tr>
+                  <td><input type="submit" name="submit" value="Play"/></td>
+              </tr>
+        </table>
+    </form>
+
+    <!--<a href="/game">PLAY</a>-->
+</div>
+<h1><%= title %></h1>
+
+<!--Using if-check to see if an error occurred and displaying appropriate message-->
+<% if (messages.error) { %>
+    <p style="color:red"><%- messages.error %></p>
+<% } %>
+<% if (messages.success) { %>
+    <p style="color:blue"><%- messages.success %></p>
+<% } %>
+
+<script type="text/javascript">
+    var err = <%- JSON.stringify(messages) %>;
+    console.log(err);
+</script>
+<table border="0" width='60%'>
+    <tr style='text-align:left; background-color:#CCC'>
+        <th>username</th>
+        <!--comment out <th>password<th> once finished
+        <th>password</th>
+        <th>high score</th>
+        comment <th>Action</th> out once finished-->
+        <th>Action</th>
+        <br>
+    </tr>
+    <% if (data) { %>
+    <!-- Using a for-loop to loop over each row in the database. -->
+            <% data.forEach(function(item){ %>
+              <% var user = global.logged_user; %>
+              <% if(user == item.username){ %>
+                <tr>
+                    <td><%= item.username %></td>
+                    <!--comment this <td> out once finished
+                    <td><%= item.password %></td>
+                    <td><%= item.hscore %></td>
+                    comment this entire <td> out once finished-->
+                    <td>
+                      <br>
+                        <div class="edit-delete" style="float:left">
+                            <a href='/users/edit/<%= item.id %>'>Edit</a> &nbsp;
+                            <form action="/users/delete/<%= item.id %>" method="post" style="float:right">
+                                <input name="delete" onclick="return confirm('Are you sure you ' + 'want to delete?')" type="submit" value='Delete'>
+                                <input name="_method" type="hidden" value="DELETE">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <% } else{ %>
+                  <tr>
+                      <td><%= item.username %></td>
+                      <!--comment this <td> out once finished
+                      <td><%= item.password %></td>
+                      <td><%= item.hscore %></td>
+                      comment this entire <td> out once finished-->
+                      <td>
+                      </td>
+                  </tr>
+                  <% } %>
+            <% }) %>
+        <% } %>
+    </table>
+
+    <!--Including Footer Partial-->
+    <%- include ../layouts/footer.ejs %>
