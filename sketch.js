@@ -14,7 +14,7 @@ function setup() {
 function draw() {
   background(0);
 
-  //image(gif,0,0);
+  image(gif,0,0);
 
   for (var i = pipes.length-1; i >= 0; i--) {
     pipes[i].show();
@@ -60,8 +60,8 @@ function Bird() {        //bird object
     fill(0,191,255);  //bird attributes *can add images/gifs later!*
     ellipse(this.x, this.y, 35, 35);
 
-    //var bird = loadImage ('empty-example/AlanParadiseGif.gif');
-    //image(bird, 300,300,309,156);
+    var bird = loadImage ('empty-example/AlanParadiseGif.gif');
+    image(bird, 300,300,309,156);
 
   }
 

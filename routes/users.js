@@ -9,8 +9,6 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (request, response) {
 
-    // TODO: Initialize the query variable with a SQL query
-    // that returns all the rows and columns in the 'users' table
     var query = 'SELECT * FROM users;';
 
     db.any(query)
@@ -42,8 +40,6 @@ app.get('/add', function (request, response) {
 // Route to insert an item. Notice that request method is POST here
 app.post('/add', function (request, response) {
     // Validate user input - ensure non emptiness
-    /*don't think we need line below*/
-    /*request.assert('id', 'id is required').notEmpty();*/
     var testId = request.body.id;
     var testUs = request.body.username;
     var testPa = request.body.password;
@@ -64,9 +60,6 @@ app.post('/add', function (request, response) {
     var errors = request.validationErrors();
         if (!errors) { // No validation errors
             var item = {
-                // sanitize() is a function used to prevent Hackers from inserting
-                // malicious code(as data) into our database. There by preventing
-                // SQL-injection attacks.
                 username: request.sanitize('username').escape().trim(),
                 password: request.sanitize('password').escape().trim()
             };
@@ -165,9 +158,6 @@ app.post('/login', function (request, response) {
   var errors = request.validationErrors();
       if (!errors) { // No validation errors
           var item = {
-              // sanitize() is a function used to prevent Hackers from inserting
-              // malicious code(as data) into our database. There by preventing
-              // SQL-injection attacks.
               username: request.sanitize('username').escape().trim(),
               password: request.sanitize('password').escape().trim()
           };
@@ -230,9 +220,6 @@ app.get('/edit/(:id)', function (request, response) {
    // Fetch the id of the item from the request.
    var itemId = request.params.id;
 
-   // TODO: Initialize the query variable with a SQL query
-   // that returns all columns of an item whose id = itemId in the
-   // 'store' table
    var query = 'SELECT * FROM users WHERE id = '+ itemId +';';
    db.one(query)
        .then(function (row) {
@@ -282,9 +269,6 @@ app.put('/edit/(:id)', function (req, res) {
    var errors = req.validationErrors();
    if (!errors) { // No validation errors
        var item = {
-           // sanitize() is a function used to prevent Hackers from inserting
-           // malicious code(as data) into our database. There by preventing
-           // SQL-injection attacks.
            username: req.sanitize('username').escape().trim(),
            password: req.sanitize('password').escape().trim()
        };
@@ -293,9 +277,6 @@ app.put('/edit/(:id)', function (req, res) {
        var User = item.username;
        var Password = item.password;
        var act_Id = global.logged_user;
-       // : Initialize the updateQuery variable with a SQL query
-       // that updates the details of an item given its id
-       // in the 'store' table
        var check = "SELECT * FROM users WHERE username = '"+ item.username + "';"
        db.one(check)
         .then(function(nrow){
@@ -383,9 +364,6 @@ app.delete('/delete/(:id)', function (req, res) {
     // Fetch item id of the item to be deleted from the request.
     var itemId = req.params.id;
 
-    // TODO: Initialize the deleteQuery variable with a SQL query
-    // that deletes an item whose id = itemId in the
-    // 'store' table
     var deleteQuery = 'DELETE FROM users WHERE id = '+ itemId +';';
     db.none(deleteQuery)
         .then(function (result) {
