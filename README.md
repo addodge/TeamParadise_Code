@@ -1,44 +1,42 @@
-TeamParadise_Code
+TeamParadise Code
 =======
 
 ### Database
 For final project our database name is __finalproject__ <br />
-table name is __users__
-to check the database type
+table name is __users__<br />
 
-
-### TO CHECK LOCALHOST:
-open terminal in "FinalProject" directory and type:
+### To check Localhost:
+Open terminal in "FinalProject" directory and type:
 ```
 node server.js
 ```
 
-then put the http link into google chrome
+Then put the http link into google chrome
 ```
 psql -U postgres -h localhost
 ```
 
 The password is __postgres__
 
-then type: 
+Then type: 
 ```
 "\c finalproject"
 ```
 
-and it will bring you into the database. You can type 
+And it will bring you into the database. You can type 
 ```
 SELECT * FROM finalproject;
 ```
-to see the contents of the database.
+To see the contents of the database.
 
-__NOTE:__ to exit out of database press 
+__NOTE:__ To exit out of database press 
 ```
 Ctrl + D
 ```
 
-IF YOU WANT TO RESET "users" TABLE:
+### If you want to reset "users" Table:
 
-open terminal in "FinalProject" directory and type 
+Open terminal in "FinalProject" directory and type 
 ```
 sudo su postgres
 psql finalproject < database.sql
