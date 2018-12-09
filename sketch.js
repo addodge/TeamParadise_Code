@@ -4,15 +4,21 @@
 var bird;
 var pipes = [];
 var score = 0;
+var img;
+var pix;
 
 function setup() {
+  pix = loadImage('AlanParadiseGif.gif');
+  //pix.loadPixels();
+  //img = createImage(850, 500, pix.pixels);
   createCanvas(850, 500);
+  background(pix);
   bird = new Bird();
   pipes.push(new Pipe());
 }
 
 function draw() {
-  background(0);
+  //background(0);
 
   image(gif,0,0);
 
