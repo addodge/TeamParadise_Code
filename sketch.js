@@ -153,7 +153,5 @@ function Pipe() {
 function Score() {  //need to expand scoring function
   this.score = 0;
     console.log("This is: ", this.score);
-
-
 }
 */
