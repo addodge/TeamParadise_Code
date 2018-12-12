@@ -7,7 +7,7 @@ const dbConfig = {
    port: 5432,
    database: 'finalproject',
    user: 'postgres',
-   password: 'postgres' // TODO: Fill in your PostgreSQL password here.
+   password: '6558s7188' // TODO: Fill in your PostgreSQL password here.
 };
 */
 

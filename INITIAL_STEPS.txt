@@ -33,3 +33,11 @@ YOU SHOULD SEE THE FOLLOWING:
   4 | Taicheng | password4 |       
   5 | Connor   | password5 |       
   6 | Jason    | password6 |   
+
+### To check Localhost:
+Open terminal in "FinalProject" directory and type:
+node server.js
+```
+Then put the http link into google chrome:
+localhost:4000
+

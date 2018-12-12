@@ -1,0 +1,287 @@
+{
+  "id": "98a94b84-a288-4e88-ad7f-de140b8c61a9",
+  "version": "1.1",
+  "name": "CSCI3308",
+  "url": "https://alinparadise.herokuapp.com/",
+  "tests": [{
+    "id": "c7d54b55-54e5-47f8-ae16-aac4896a7d98",
+    "name": "LogIn",
+    "commands": [{
+      "id": "fddfc4bb-395d-4f5d-b617-3ac5db1d11e0",
+      "comment": "",
+      "command": "open",
+      "target": "https://alinparadise.herokuapp.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0f241475-f70e-4e38-90dc-514e1234dc97",
+      "comment": "",
+      "command": "clickAt",
+      "target": "css=.btn:nth-child(2) > a",
+      "targets": [
+        ["css=.btn:nth-child(2) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Log in')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/users/login')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d1378146-7a7e-4493-83d4-8b74e7d8fb6c",
+      "comment": "",
+      "command": "type",
+      "target": "id=name",
+      "targets": [
+        ["id=name", "id"],
+        ["name=username", "name"],
+        ["css=#name", "css"],
+        ["css=#name", "css:finder"],
+        ["xpath=//input[@id='name']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Adam"
+    }, {
+      "id": "770ffbd2-2a0d-4d4e-9dca-d6a9d21efa4c",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=input[name=\"password\"]", "css"],
+        ["css=tr:nth-child(2) input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": "password1"
+    }, {
+      "id": "45b0548c-862f-4b01-879a-a14d50cca1d7",
+      "comment": "",
+      "command": "clickAt",
+      "target": "name=Submit",
+      "targets": [
+        ["name=Submit", "name"],
+        ["css=input[name=\"Submit\"]", "css"],
+        ["css=tr:nth-child(3) input", "css:finder"],
+        ["xpath=//input[@name='Submit']", "xpath:attributes"],
+        ["xpath=//tr[3]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "413d8eeb-baa2-40de-aef9-ee8e604add33",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=p",
+      "targets": [
+        ["css=p", "css"],
+        ["css=p:nth-child(4)", "css:finder"],
+        ["xpath=//p", "xpath:position"]
+      ],
+      "value": "Player found"
+    }]
+  }, {
+    "id": "750da7ed-6ae9-4deb-8f8b-5f95d9997f1f",
+    "name": "SignUp",
+    "commands": [{
+      "id": "b56cf98f-3832-4fde-9aea-fb7f7c497a2e",
+      "comment": "",
+      "command": "open",
+      "target": "https://alinparadise.herokuapp.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d9b85fc6-2d2a-45cf-9a46-6c21204155a2",
+      "comment": "",
+      "command": "clickAt",
+      "target": "css=a",
+      "targets": [
+        ["css=a", "css"],
+        ["css=.btn:nth-child(1) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign up')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/users/add')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "592b9e69-a0a8-4b29-86df-03d5c3f6a722",
+      "comment": "",
+      "command": "type",
+      "target": "id=name",
+      "targets": [
+        ["id=name", "id"],
+        ["name=username", "name"],
+        ["css=#name", "css"],
+        ["css=#name", "css:finder"],
+        ["xpath=//input[@id='name']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "temporary"
+    }, {
+      "id": "1cfbb40e-d59e-4326-a2c3-2c4804242076",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=input[name=\"password\"]", "css"],
+        ["css=tr:nth-child(2) input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": "password"
+    }, {
+      "id": "650a8a59-3731-4c42-a0a8-6f9b1f0e8196",
+      "comment": "",
+      "command": "clickAt",
+      "target": "name=Submit",
+      "targets": [
+        ["name=Submit", "name"],
+        ["css=input[name=\"Submit\"]", "css"],
+        ["css=tr:nth-child(3) input", "css:finder"],
+        ["xpath=//input[@name='Submit']", "xpath:attributes"],
+        ["xpath=//tr[3]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a41a039a-3f4a-44f1-9195-8f06b3a5ec04",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=p",
+      "targets": [
+        ["css=p", "css"],
+        ["css=p:nth-child(4)", "css:finder"],
+        ["xpath=//p", "xpath:position"]
+      ],
+      "value": "Player data added successfully!"
+    }, {
+      "id": "83dbeba3-bae7-47c2-a9b3-e40bebf1b9ef",
+      "comment": "",
+      "command": "chooseOkOnNextConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "87f0e2c6-9007-4664-8bad-d70af6160b36",
+      "comment": "",
+      "command": "clickAt",
+      "target": "name=delete",
+      "targets": [
+        ["name=delete", "name"],
+        ["css=input[name=\"delete\"]", "css"],
+        ["css=form > input:nth-child(1)", "css:finder"],
+        ["xpath=//input[@name='delete']", "xpath:attributes"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b7cea0be-7974-40b6-9c95-798b384c9a15",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css"],
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"]
+      ],
+      "value": "Team Paradise: Final Project"
+    }]
+  }, {
+    "id": "ace35ec4-21d4-4b75-8377-77420e341c1f",
+    "name": "Game",
+    "commands": [{
+      "id": "75849194-19e4-4c1a-9cbc-77f74d9a9102",
+      "comment": "",
+      "command": "open",
+      "target": "https://alinparadise.herokuapp.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cb26bf34-9d06-427e-a1a6-023243082f4a",
+      "comment": "",
+      "command": "clickAt",
+      "target": "css=.btn:nth-child(2) > a",
+      "targets": [
+        ["css=.btn:nth-child(2) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Log in')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/users/login')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a92dc360-d9cb-4236-85e5-b5460d048592",
+      "comment": "",
+      "command": "type",
+      "target": "id=name",
+      "targets": [
+        ["id=name", "id"],
+        ["name=username", "name"],
+        ["css=#name", "css"],
+        ["css=#name", "css:finder"],
+        ["xpath=//input[@id='name']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Adam"
+    }, {
+      "id": "1b1f032c-68e3-4b80-8b91-930566da9039",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=input[name=\"password\"]", "css"],
+        ["css=tr:nth-child(2) input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": "password1"
+    }, {
+      "id": "70aeeb5d-5482-433f-a8c3-6825b07cbadc",
+      "comment": "",
+      "command": "clickAt",
+      "target": "name=Submit",
+      "targets": [
+        ["name=Submit", "name"],
+        ["css=input[name=\"Submit\"]", "css"],
+        ["css=tr:nth-child(3) input", "css:finder"],
+        ["xpath=//input[@name='Submit']", "xpath:attributes"],
+        ["xpath=//tr[3]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "20770e2b-f203-4fe4-a0b4-2c549b7b53e9",
+      "comment": "",
+      "command": "clickAt",
+      "target": "name=submit",
+      "targets": [
+        ["name=submit", "name"],
+        ["css=input[name=\"submit\"]", "css"],
+        ["css=td > input", "css:finder"],
+        ["xpath=//input[@name='submit']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f76db102-2473-4c81-b23e-c6a6bea5782d",
+      "comment": "",
+      "command": "assertText",
+      "target": "linkText=Quit Game",
+      "targets": [
+        ["linkText=Quit Game", "linkText"],
+        ["css=a", "css"],
+        ["css=a", "css:finder"],
+        ["xpath=//a[contains(text(),'Quit Game')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/users')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": "Quit Game"
+    }]
+  }],
+  "suites": [{
+    "id": "d8887a5a-607d-4f7f-b40f-e90d83d44681",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["c7d54b55-54e5-47f8-ae16-aac4896a7d98"]
+  }],
+  "urls": ["https://alinparadise.herokuapp.com/"],
+  "plugins": []
+}
