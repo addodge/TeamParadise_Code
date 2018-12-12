@@ -1,11 +1,14 @@
 var express = require('express');
 var db = require('../database');
 var app = express();
-var logged_user;
 module.exports = app;
-// global.logged_user; is username not id
+var logged_user;
+var hscore_user;
+var score_user;
+global.score_user;
+global.hscore_user;
 global.logged_user;
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname));
 
 app.get('/', function (request, response) {
 
@@ -64,6 +67,7 @@ app.post('/add', function (request, response) {
                 password: request.sanitize('password').escape().trim()
             };
             global.logged_user = item.username;
+	    global.hscore_user = 0;
             // ensures that person signing up doesn't use someone elses username
             var query = "SELECT id FROM users WHERE username='"+ item.username +"';";
 
@@ -80,7 +84,7 @@ app.post('/add', function (request, response) {
                     }
                     else {
                       // Running SQL query to insert data into the store table
-                      db.none('INSERT INTO users(username, password) VALUES($1, $2)', [item.username, item.password])
+                      db.none('INSERT INTO users(username, password, hscore) VALUES($1, $2, $3)', [item.username, item.password, 0])
                           .then(function (result) {
                               request.flash('success', 'Player data added successfully!');
                               // render views/store/list.ejs
@@ -99,7 +103,7 @@ app.post('/add', function (request, response) {
                     }
                 })
                 .catch(function (err) {
-                  db.none('INSERT INTO users(username, password) VALUES($1, $2)', [item.username, item.password])
+                  db.none('INSERT INTO users(username, password) VALUES($1, $2 $3)', [item.username, item.password, 0])
                       .then(function (result) {
                           request.flash('success', 'Player data added successfully!');
                           // render views/store/list.ejs
@@ -162,13 +166,14 @@ app.post('/login', function (request, response) {
               password: request.sanitize('password').escape().trim()
           };
           global.logged_user = item.username;
+	  global.hscore_user = item.hscore;
           var query = "select id from users where username='"+ item.username +"' and password='"+ item.password +"';";
 
           db.one(query)
               .then(function (row) {
                   // if item not found
                   if (row.length == 0) {
-                      request.flash('error', 'Player not found');
+                      request.flash('error', 'username or password incorrect');
                       response.redirect('users/login')
                   }
                   else {
@@ -178,7 +183,7 @@ app.post('/login', function (request, response) {
                   }
               })
               .catch(function (err) {
-                  request.flash('error', 'Player not found');
+                  request.flash('error', 'username or password incorrect');
                   response.render('users/login', {
                       title: 'Log In',
                       username: request.body.username,
@@ -204,15 +209,20 @@ app.get('/game', function (request, response) {
 
 });
 
-app.post('/game', function (request, response) {//TODO: THIS PART DOES NOT WORK YET
-
-      var updateQuery = "UPDATE users SET hscore = '"+ score +"' WHERE username = '"+ name +"';";
+app.get('/submit_score', function (request, response) {
+    //global.score_user = ss;
+    var updateQuery = "UPDATE users SET hscore = '"+ "0" +"' WHERE username = '"+ global.logged_user +"';";
+    if (global.score_user){if(score_user>hscore_user){
+	updateQuery = "UPDATE users SET hscore = '"+ "0" +"' WHERE username = '"+ logged_user +"';";
+	}}
        // Running SQL query to insert data into the store table
+    console.log(updateQuery);
        db.none(updateQuery)
            .then(function (result) {
  	   response.redirect('/users')
 	})
         .catch(function (err) {response.redirect('/')})
+    //response.render('users/submit_score')
 });
 
 // route to edit an item

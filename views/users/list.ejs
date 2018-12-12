@@ -11,10 +11,6 @@
 <body>
 <div>
    <a href="/">Home</a>
-   <!--
-   <a href="/users/add">Add Player</a> |
-    <a href="/users">All Players</a> |
-    -->
 
     <form action="/users/game" method="get" name="form1">
         <table width="25%" border="0">
@@ -24,7 +20,6 @@
         </table>
     </form>
 
-    <!--<a href="/game">PLAY</a>-->
 </div>
 <h1><%= title %></h1>
 
@@ -43,24 +38,26 @@
 <table border="0" width='60%'>
     <tr style='text-align:left; background-color:#CCC'>
         <th>username</th>
-        <!--comment out <th>password<th> once finished
-        <th>password</th>
-        <th>high score</th>
-        comment <th>Action</th> out once finished-->
+        <% var user = global.logged_user; %>
+        <% if(user == "admin"){ %>
+          <th>password</th>
+        <% } %>
+        <!--<th>high score</th> -->
+        
         <th>Action</th>
         <br>
     </tr>
     <% if (data) { %>
     <!-- Using a for-loop to loop over each row in the database. -->
             <% data.forEach(function(item){ %>
-              <% var user = global.logged_user; %>
-              <% if(user == item.username){ %>
-                <tr>
+            <% if(user == "admin"){ %><!-- ADMIN POWER -->
+	      <tr>
                     <td><%= item.username %></td>
-                    <!--comment this <td> out once finished
-                    <td><%= item.password %></td>
-                    <td><%= item.hscore %></td>
-                    comment this entire <td> out once finished-->
+                    <% if(user == "admin"){ %>
+                      <td><%= item.password %></td>
+		    <% } %>
+                    <!--<td><%= item.hscore %></td> -->
+                    
                     <td>
                       <br>
                         <div class="edit-delete" style="float:left">
@@ -72,17 +69,32 @@
                         </div>
                     </td>
                 </tr>
-                <% } else{ %>
+	      <% } else{ %><!-- NORMAL PLAYER -->
+                <% if(user == item.username){ %>
                   <tr>
+                    <td><%= item.username %></td>
+                   <!-- <td><%= item.hscore %></td>-->
+                    
+                    <td>
+                      <br>
+                        <div class="edit-delete" style="float:left">
+                            <a href='/users/edit/<%= item.id %>'>Edit</a> &nbsp;
+                            <form action="/users/delete/<%= item.id %>" method="post" style="float:right">
+                                <input name="delete" onclick="return confirm('Are you sure you ' + 'want to delete?')" type="submit" value='Delete'>
+                                <input name="_method" type="hidden" value="DELETE">
+                            </form>
+                        </div>
+                    </td>
+                  </tr>
+                  <% } else{ if (item.username != "admin"){ %>
+                    <tr>
                       <td><%= item.username %></td>
-                      <!--comment this <td> out once finished
-                      <td><%= item.password %></td>
-                      <td><%= item.hscore %></td>
-                      comment this entire <td> out once finished-->
+                       <!--<td><%= item.hscore %></td>-->
                       <td>
                       </td>
-                  </tr>
-                  <% } %>
+                    </tr>
+                  <% }} %>
+                <% } %>
             <% }) %>
         <% } %>
     </table>

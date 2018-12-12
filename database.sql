@@ -10,4 +10,4 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (username, password, hscore)
-VALUES ('Adam','password1',NULL),('Hunter','password2',NULL),('John','password3',NULL),('Taicheng','password4',NULL),('Connor','password5',NULL),('Jason','password6',NULL);
+VALUES ('admin','password0',0),('Adam','password1',0),('Hunter','password2',0),('John','password3',0),('Taicheng','password4',0),('Connor','password5',0),('Jason','password6',0);

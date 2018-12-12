@@ -1,0 +1,43 @@
+1. unzip FinalProject.zip and navigate into the directory
+
+2. open terminal in "FinalProject" directory
+
+3. type: "psql -U postgres -h localhost" hit enter
+   -> (need to know postgres password here)
+
+4. type: "DROP DATABASE IF EXISTS finalproject;" hit enter
+
+5. type: "CREATE DATABASE finalproject;" hit enter
+
+6. open new terminal in "FinalProject" directory
+
+7. type: "sudo su postgres" hit enter
+
+8. type: "psql finalproject<database.sql" hit enter
+
+to check if it worked you can open a new terminal inside 
+the "FinalProject" directory
+
+9. type: "psql -U postgres -h localhost" hit enter
+
+10. type: "\c finalproject" hit enter
+
+11. type: "SELECT * FROM users;" hit enter
+
+
+YOU SHOULD SEE THE FOLLOWING:
+
+  1 | Adam     | password1 |       
+  2 | Hunter   | password2 |       
+  3 | John     | password3 |       
+  4 | Taicheng | password4 |       
+  5 | Connor   | password5 |       
+  6 | Jason    | password6 |   
+
+### To check Localhost:
+Open terminal in "FinalProject" directory and type:
+node server.js
+```
+Then put the http link into google chrome:
+localhost:4000
+
