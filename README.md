@@ -4,7 +4,7 @@ TeamParadise Code
 John Gadbois, Adam Dodge, Connor Anthony, Jason Nguyen, Taicheng Song, Hunter Tompkins
 
 ## Our Project
-Our project for CSCI 3308 is to create a game similar to flappy bird that can be uploaded to heroku and played on a computer. It is called __Al In Paradise__, and has the background of a beach. It is made to be a little easier than the original flappy bird. It includes a signup/signin page, as well as a way to edit your profile. 
+Our project for CSCI 3308 is to create a game similar to flappy bird that can be played on a computer. It is also uploaded to Heroku at https://alinparadise.herokuapp.com/. It is called __Al In Paradise__, and has the background of a beach. It is made to be a little easier than the original flappy bird. It includes a signup/signin page, as well as a way to edit your profile. 
 
 ## Specifics
 
