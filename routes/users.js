@@ -46,10 +46,7 @@ app.post('/add', function (request, response) {
     var testId = request.body.id;
     var testUs = request.body.username;
     var testPa = request.body.password;
-    console.log(testUs.length);
-    console.log(testPa.length);
-    console.log(testUs);
-    console.log(testPa);
+    console.log("user: "+testUs+" attempt login with password: "+testPa);
     if(testUs.length==0 || testPa.length==0){
       request.flash('error', 'neither field may be empty');
       response.render('users/add', {
@@ -106,9 +103,7 @@ app.post('/add', function (request, response) {
                   db.none('INSERT INTO users(username, password) VALUES($1, $2 $3)', [item.username, item.password, 0])
                       .then(function (result) {
                           request.flash('success', 'Player data added successfully!');
-                          // render views/store/list.ejs
-                          // after user makes new account send him
-                          // to the profiles list
+                          
                           response.redirect('/users')
                       }).catch(function (err) {
                         request.flash('error', err);
@@ -121,6 +116,7 @@ app.post('/add', function (request, response) {
                       })
                 })
         } else {
+	    console.log("failed")
             var error_msg = errors.reduce((accumulator, current_error) => accumulator + '<br />' + current_error.msg, '');
             request.flash('error', error_msg);
             response.render('users/add', {
@@ -147,8 +143,9 @@ app.post('/login', function (request, response) {
   var testPa = request.body.password;
   /*console.log(testUs.length);
   console.log(testPa.length);*/
-  console.log(testUs+" logged in with password: "+testPa);
+  console.log("user: "+testUs+" attempt log in with password: "+testPa);
   if(testUs.length==0 || testPa.length==0){
+    console.log("failed")
     request.flash('error', 'neither field may be empty');
     response.render('users/login', {
         title: 'Log In',
@@ -166,8 +163,6 @@ app.post('/login', function (request, response) {
           };
 	  var hscore = db.query("select hscore from users where username='"+item.username+"';");
           global.logged_user = item.username;
-	  //console.log(hscore);
-	  //global.hscore_user = item.hscore;
           var query = "select id from users where username='"+ item.username +"' and password='"+ item.password +"';";
 
           db.one(query)
